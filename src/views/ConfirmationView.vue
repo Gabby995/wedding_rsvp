@@ -12,7 +12,8 @@ export default {
   setup() {
     const polish = inject("language");
     onBeforeRouteLeave(() => {
-      let message = "Czy na pewno chcesz opuścić tę stronę";
+      let message =
+        "Czy na pewno chcesz opuścić tę stronę? Twoja odpowiedź nie została zapisana";
       if (computedData.value) {
         if (!polish.value) {
           message = "Do you really want to leave? you have unsaved changes!";
