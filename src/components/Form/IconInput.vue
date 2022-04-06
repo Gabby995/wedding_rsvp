@@ -35,9 +35,7 @@ export default {
     error: {
       type: Boolean,
     },
-    modelValue: {
-      type: String,
-    },
+    modelValue: {},
   },
   emits: ["update:modelValue"],
   setup(props, context) {

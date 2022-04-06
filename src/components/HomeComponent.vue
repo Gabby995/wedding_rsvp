@@ -18,7 +18,7 @@
           forLabel="Guest-Name"
           icon="person"
           :placeholder="placeholderLogic"
-          v-model="state.user.surname"
+          v-model.trim="state.user.surname"
           :error="v$.user.surname.$error ? true : false"
         />
       </div>
@@ -31,7 +31,7 @@
           forLabel="Guest-Pin"
           icon="pin"
           placeholder="Pin"
-          v-model="state.user.pin"
+          v-model.number="state.user.pin"
           :error="v$.user.pin.$error ? true : false"
         />
       </div>
@@ -43,7 +43,7 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
+import { required, minLength } from "@vuelidate/validators";
 import IconInput from "@/components/Form/IconInput.vue";
 import LoadingButton from "./Form/LoadingButton.vue";
 import BaseButton from "./Form/BaseButton.vue";
@@ -66,7 +66,7 @@ export default {
     const rules = {
       user: {
         surname: { required },
-        pin: { required },
+        pin: { required, minLength: minLength(4) },
       },
     };
     const v$ = useVuelidate(rules, state, language);
