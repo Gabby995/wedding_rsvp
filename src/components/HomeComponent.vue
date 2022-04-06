@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl">
+  <div
+    class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl px-2 pt-10"
+  >
     <slot></slot>
     <h1 v-if="polish">Witam</h1>
     <h1 v-else>Welcome</h1>

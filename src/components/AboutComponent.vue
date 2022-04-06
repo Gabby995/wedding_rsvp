@@ -1,11 +1,11 @@
 <template>
   <slot></slot>
   <div
-    class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2"
+    class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2 pt-10"
   >
     <section id="Names">
       <div>
-        <h2 class="text-2xl font-semibold text-green">Marta</h2>
+        <h2 class="text-3xl font-semibold text-green">Marta</h2>
         <h3 class="text-lg">Gęborys</h3>
       </div>
       <div class="my-2">
@@ -16,7 +16,7 @@
         </h4>
       </div>
       <div>
-        <h2 class="text-2xl font-semibold text-green">Gabriel</h2>
+        <h2 class="text-3xl font-semibold text-green">Gabriel</h2>
         <h3 class="text-lg">Kołodziej</h3>
       </div>
     </section>
@@ -38,9 +38,16 @@
       Po ceremonii ślubnej miło nam będzie gościć Was na przyjęciu weselnym w
       Restauracji Staropolskiej przy ulicy Lwowskiej 126.
     </p>
+    <div class="flex items-center gap-x-10 mx-auto">
+      <Icon icon="emojione-monotone:wrapped-gift" class="text-4xl" />
+      <span class="material-icons text-3xl"> east </span>
+      <Icon icon="fa6-solid:money-bill-1-wave" color="black" class="text-3xl" />
+    </div>
   </div>
 </template>
-
+<script setup>
+import { Icon } from "@iconify/vue";
+</script>
 <style>
 h4:before,
 h4:after {
