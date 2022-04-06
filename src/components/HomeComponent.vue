@@ -17,7 +17,7 @@
         <IconInput
           forLabel="Guest-Name"
           icon="person"
-          placeholder="Nazwisko"
+          :placeholder="placeholderLogic"
           v-model="state.user.surname"
           :error="v$.user.surname.$error ? true : false"
         />
@@ -47,7 +47,7 @@ import { required } from "@vuelidate/validators";
 import IconInput from "@/components/Form/IconInput.vue";
 import LoadingButton from "./Form/LoadingButton.vue";
 import BaseButton from "./Form/BaseButton.vue";
-import { ref, reactive, inject } from "vue";
+import { ref, reactive, inject, computed } from "vue";
 export default {
   components: {
     IconInput,
@@ -56,13 +56,13 @@ export default {
   },
   setup() {
     let isLoading = ref(false);
+    const language = inject("language");
     const state = reactive({
       user: {
         surname: "",
         pin: "",
       },
     });
-    const language = inject("language");
     const rules = {
       user: {
         surname: { required },
@@ -79,7 +79,14 @@ export default {
         isLoading.value = true;
       }
     }
-    return { isLoading, state, v$, submitForm, language };
+    const placeholderLogic = computed(function () {
+      if (language.value) {
+        return "Nazwisko";
+      } else {
+        return "Surname";
+      }
+    });
+    return { isLoading, state, v$, submitForm, language, placeholderLogic };
   },
 };
 </script>

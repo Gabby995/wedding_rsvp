@@ -37,7 +37,6 @@ export default {
   setup() {
     const polish = ref(true);
     function changeLanguage() {
-      console.log("inside", polish.value);
       polish.value = !polish.value;
     }
     provide("language", polish);
