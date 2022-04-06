@@ -48,6 +48,8 @@ import IconInput from "@/components/Form/IconInput.vue";
 import LoadingButton from "./Form/LoadingButton.vue";
 import BaseButton from "./Form/BaseButton.vue";
 import { ref, reactive, inject, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
   components: {
     IconInput,
@@ -57,6 +59,8 @@ export default {
   setup() {
     let isLoading = ref(false);
     const language = inject("language");
+    const router = useRouter();
+    const store = useStore();
     const state = reactive({
       user: {
         surname: "",
@@ -77,6 +81,17 @@ export default {
         return;
       } else {
         isLoading.value = true;
+        store.commit("guest/setGuest", {
+          userID: "1234",
+          userSurname: "Stark",
+          displayName: "Tony & Pepper Stark",
+          type: "Family",
+          guests: 5,
+          notes: "I am Iron-Man",
+        });
+        router.push({
+          name: "confirmation",
+        });
       }
     }
     const placeholderLogic = computed(function () {

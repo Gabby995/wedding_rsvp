@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import rules from "@/rules";
 
 const routes = [
   {
@@ -19,11 +20,11 @@ const routes = [
   {
     path: "/confirmation",
     name: "confirmation",
-
     component: () =>
       import(
         /* webpackChunkName: "confirmation" */ "../views/ConfirmationView.vue"
       ),
+    beforeEnter: rules.guestSet,
   },
   {
     path: "/admin",
