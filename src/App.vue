@@ -1,7 +1,12 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/"
+      ><span v-if="polish">Strona Główna</span> <span v-else>Home</span>
+    </router-link>
+    |
+    <router-link to="/about"
+      ><span v-if="polish">O Nas</span> <span v-else>About</span></router-link
+    >
   </nav>
   <router-view />
   <div id="footer" class="flex justify-center gap-x-2 absolute bottom-0 w-full">
