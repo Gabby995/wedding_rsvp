@@ -13,7 +13,7 @@
       :id="forLabel"
       :value="modelValue"
       @input="updateValue"
-      class="rounded-r-lg flex-1 appearance-none border w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+      class="rounded-r-lg flex-1 appearance-none border w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-1 focus:ring-green focus:border-transparent"
       :class="error ? 'border-red-500' : 'border-gray-300'"
       :placeholder="placeholder"
     />

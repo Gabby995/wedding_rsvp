@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="homeCard flex flex-col justify-center m-auto gap-y-5 max-w-xl h-96 rounded-xl"
-  >
+  <div class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl">
     <slot></slot>
     <h1 v-if="polish">Witam</h1>
     <h1 v-else>Welcome</h1>
     <form
-      class="w-1/2 mx-auto flex flex-col gap-y-10 md:text-lg"
+      class="w-1/2 mx-auto flex flex-col gap-y-5 md:text-lg"
       @submit.prevent="submitForm"
     >
       <div>
@@ -110,20 +108,3 @@ export default {
   // },
 };
 </script>
-
-<style>
-.homeCard::after {
-  content: "";
-  background-image: url(../assets/rsvp_image_large.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  /* background-size: cover; */
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-}
-</style>
