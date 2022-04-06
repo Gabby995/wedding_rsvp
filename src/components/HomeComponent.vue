@@ -3,7 +3,7 @@
     class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl px-2 pt-10"
   >
     <slot></slot>
-    <h1 v-if="polish">Witam</h1>
+    <h1 v-if="language">Witam</h1>
     <h1 v-else>Welcome</h1>
     <form
       class="w-1/2 mx-auto flex flex-col gap-y-5 md:text-lg"
@@ -11,20 +11,20 @@
     >
       <div>
         <label for="Guest-Name" class="text-green font-semibold">
-          <span v-if="polish">Nazwisko z zaprosznia</span>
+          <span v-if="language">Nazwisko z zaprosznia</span>
           <span v-else>Surname on invitation</span>
         </label>
         <IconInput
           forLabel="Guest-Name"
           icon="person"
-          :placeholder="placeholder"
+          placeholder="Nazwisko"
           v-model="state.user.surname"
           :error="v$.user.surname.$error ? true : false"
         />
       </div>
       <div>
         <label for="Guest-Pin" class="text-green font-semibold">
-          <span v-if="polish">Kod pin z zaproszenia</span>
+          <span v-if="language">Kod pin z zaproszenia</span>
           <span v-else>Code pin from your invitation</span>
         </label>
         <IconInput
@@ -47,18 +47,8 @@ import { required } from "@vuelidate/validators";
 import IconInput from "@/components/Form/IconInput.vue";
 import LoadingButton from "./Form/LoadingButton.vue";
 import BaseButton from "./Form/BaseButton.vue";
-import { ref, reactive } from "vue";
+import { ref, reactive, inject } from "vue";
 export default {
-  props: {
-    polish: {
-      type: Boolean,
-      default: false,
-    },
-    placeholder: {
-      type: String,
-      default: "Nazwisko",
-    },
-  },
   components: {
     IconInput,
     LoadingButton,
@@ -72,21 +62,14 @@ export default {
         pin: "",
       },
     });
-    // const rules = computed(() => {
-    //   return {
-    //     user: {
-    //       surname: { required },
-    //       pin: { required },
-    //     },
-    //   };
-    // });
+    const language = inject("language");
     const rules = {
       user: {
         surname: { required },
         pin: { required },
       },
     };
-    const v$ = useVuelidate(rules, state);
+    const v$ = useVuelidate(rules, state, language);
 
     function submitForm() {
       v$.value.$touch();
@@ -96,17 +79,7 @@ export default {
         isLoading.value = true;
       }
     }
-    return { isLoading, state, v$, submitForm };
+    return { isLoading, state, v$, submitForm, language };
   },
-  // methods: {
-  //   submitForm() {
-  //     this.v$.$validate();
-  //     if (this.v$.$error) {
-  //       console.log("errpr", this.v$);
-  //       this.isLoading = true;
-  //       console.log("Submited");
-  //     }
-  //   },
-  // },
 };
 </script>

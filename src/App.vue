@@ -4,7 +4,42 @@
     <router-link to="/about">About</router-link>
   </nav>
   <router-view />
+  <div id="footer" class="flex justify-center gap-x-2 absolute bottom-0 w-full">
+    <div class="relative inline-block w-10 mr-2 align-middle select-none">
+      <span class="text-green font-semibold">
+        <span v-if="polish">English</span>
+        <span v-else>Polski</span>
+      </span>
+      <input
+        @click="changeLanguage"
+        type="checkbox"
+        name="toggle"
+        id="Blue"
+        class="checked:bg-green outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+      />
+      <label
+        for="Blue"
+        class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+      >
+      </label>
+    </div>
+  </div>
 </template>
+
+<script>
+import { ref, provide } from "vue";
+export default {
+  setup() {
+    const polish = ref(true);
+    function changeLanguage() {
+      console.log("inside", polish.value);
+      polish.value = !polish.value;
+    }
+    provide("language", polish);
+    return { polish, changeLanguage };
+  },
+};
+</script>
 
 <style>
 #app {
