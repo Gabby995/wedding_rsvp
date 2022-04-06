@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2 pt-10"
+    class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2 pt-16"
   >
     <slot></slot>
     <section id="Names">

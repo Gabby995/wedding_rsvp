@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl px-2 pt-10"
+    class="flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl px-2 pt-16"
   >
     <slot></slot>
     <h1 v-if="language">Witam</h1>
