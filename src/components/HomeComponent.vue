@@ -82,12 +82,17 @@ export default {
       } else {
         isLoading.value = true;
         store.commit("guest/setGuest", {
-          userID: "1234",
-          userSurname: "Stark",
-          displayName: "Tony & Pepper Stark",
-          type: "Family",
-          guests: 5,
-          notes: "I am Iron-Man",
+          invitation: {
+            id: 1,
+            surname: "Stark",
+            display_name: "Tony & Pepper Stark",
+            type: "Family",
+            plus_one: "No",
+            guests: 20,
+            notes: "'I am Iron-Man'",
+            pin: "3VcY",
+            confirmation: "Yes",
+          },
         });
         router.push({
           name: "confirmation",
