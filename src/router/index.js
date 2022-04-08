@@ -46,7 +46,10 @@ const router = createRouter({
   routes,
 });
 router.afterEach((to, from) => {
-  if (from.name === "confirmation") {
+  if (
+    from.name === "confirmation" &&
+    router.currentRoute._rawValue.name !== "confirmation"
+  ) {
     store.commit("guest/setGuest", null);
   }
 });
