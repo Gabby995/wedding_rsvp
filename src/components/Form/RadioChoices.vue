@@ -3,12 +3,26 @@
   <p v-else>Plus One?</p>
   <div class="flex justify-center gap-8 pb-5">
     <label class="inline-flex items-center">
-      <input type="radio" name="AdditionalGuest" value="Yes" class="h-5 w-5" />
+      <input
+        type="radio"
+        name="AdditionalGuest"
+        value="Yes"
+        class="h-5 w-5"
+        v-model="plus_one"
+        @change="updateValue"
+      />
       <span class="ml-2" v-if="polish"> Tak </span>
       <span class="ml-2" v-else> Yes </span>
     </label>
     <label class="inline-flex items-center">
-      <input type="radio" name="AdditionalGuest" value="No" class="h-5 w-5" />
+      <input
+        type="radio"
+        name="AdditionalGuest"
+        value="No"
+        class="h-5 w-5"
+        v-model="plus_one"
+        @change="updateValue"
+      />
       <span class="ml-2" v-if="polish"> Nie </span>
       <span class="ml-2" v-else> No </span>
     </label>
@@ -16,11 +30,16 @@
 </template>
 
 <script>
-import { inject } from "vue";
+import { ref, inject } from "vue";
 export default {
-  setup() {
+  emits: ["update-plus-one"],
+  setup(props, context) {
+    let plus_one = ref("No");
     const polish = inject("language");
-    return { polish };
+    const updateValue = () => {
+      context.emit("update-plus-one", plus_one.value);
+    };
+    return { polish, updateValue, plus_one };
   },
 };
 </script>

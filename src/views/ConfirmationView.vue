@@ -10,10 +10,23 @@
     <section id="GuestForm" class="my-2">
       <form
         class="md:text-lg flex flex-col justify-center items-center gap-y-2 pb-8"
-        @submit.prevent="submitForm"
+        @submit.prevent="submitGuestResponse"
       >
-        <DropdownChoices :type="computedData.invitation.type" />
-        <RadioChoices v-if="computedData.invitation.type === 'Single'" />
+        <DropdownChoices
+          :type="computedData.invitation.type"
+          v-model="state.invitation.confirmation"
+          :error="v$.invitation.confirmation.$error ? true : false"
+        />
+        <template
+          v-if="
+            computedData.invitation.type === 'Single' &&
+            state.invitation.confirmation === 'Yes'
+          "
+        >
+          <RadioChoices @update-plus-one="updatePlusOne" />
+        </template>
+
+        {{ state }}
         <BaseButton v-if="!isLoading">
           <span v-if="polish"> Wyślij </span>
           <span v-else> Submit </span>
@@ -26,7 +39,9 @@
 </template>
 
 <script>
-import { ref, computed, inject, onBeforeMount } from "vue";
+import { ref, reactive, computed, inject, onBeforeMount } from "vue";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 import { useStore } from "vuex";
 import { onBeforeRouteLeave } from "vue-router";
 import WeddingDetails from "@/components/Sections/WeddingDetails.vue";
@@ -46,7 +61,27 @@ export default {
   setup() {
     const polish = inject("language");
     let isLoading = ref(false);
-    let response = ref("Yes");
+    const store = useStore();
+    const computedData = computed(function () {
+      return store.getters["guest/getGuest"];
+    });
+    const state = reactive({
+      invitation: {
+        id: computedData.value.invitation.id,
+        confirmation: "",
+        plus_one: "No",
+      },
+    });
+    const rules = {
+      invitation: {
+        confirmation: { required },
+      },
+    };
+    function updatePlusOne(data) {
+      console.log("IPDATED", data);
+      state.invitation.plus_one = data;
+    }
+    const v$ = useVuelidate(rules, state);
     // Used to setup beforeUnload (stops reloading page)
     onBeforeMount(function () {
       window.addEventListener("beforeunload", preventNav);
@@ -69,16 +104,21 @@ export default {
         if (!answer) return false;
       }
     });
-    const store = useStore();
-    const computedData = computed(function () {
-      return store.getters["guest/getGuest"];
-    });
 
     function submitGuestResponse() {
+      v$.value.$touch();
       console.log("RESPNSE SIBMIT");
     }
 
-    return { isLoading, response, computedData, polish, submitGuestResponse };
+    return {
+      isLoading,
+      computedData,
+      polish,
+      submitGuestResponse,
+      v$,
+      state,
+      updatePlusOne,
+    };
   },
 };
 </script>
