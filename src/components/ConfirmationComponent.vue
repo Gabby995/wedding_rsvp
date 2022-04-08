@@ -1,40 +1,35 @@
 <template>
-  <div
-    class="md:flex flex-col justify-center items-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2 md:pt-16"
-  >
-    <slot></slot>
-    <section id="GuestDetails" class="pt-5">
-      <h1 class="font-bold text-2xl">
-        {{ computedData.invitation.display_name }}
-      </h1>
-    </section>
-    <section id="GuestForm" class="my-2">
-      <form
-        class="md:text-lg flex flex-col justify-center items-center gap-y-2 pb-8"
-        @submit.prevent="submitGuestResponse"
+  <section id="GuestDetails" class="pt-5">
+    <h1 class="font-bold text-2xl">
+      {{ computedData.invitation.display_name }}
+    </h1>
+  </section>
+  <section id="GuestForm" class="my-2">
+    <form
+      class="md:text-lg flex flex-col justify-center items-center gap-y-2 pb-8"
+      @submit.prevent="submitGuestResponse"
+    >
+      <DropdownChoices
+        :type="computedData.invitation.type"
+        v-model="state.invitation.confirmation"
+        :error="v$.invitation.confirmation.$error ? true : false"
+      />
+      <template
+        v-if="
+          computedData.invitation.type === 'Single' &&
+          state.invitation.confirmation === 'Yes'
+        "
       >
-        <DropdownChoices
-          :type="computedData.invitation.type"
-          v-model="state.invitation.confirmation"
-          :error="v$.invitation.confirmation.$error ? true : false"
-        />
-        <template
-          v-if="
-            computedData.invitation.type === 'Single' &&
-            state.invitation.confirmation === 'Yes'
-          "
-        >
-          <RadioChoices @update-plus-one="updatePlusOne" />
-        </template>
-        <BaseButton v-if="!isLoading">
-          <span v-if="polish"> Wyślij </span>
-          <span v-else> Submit </span>
-        </BaseButton>
-        <LoadingButton v-if="isLoading" />
-      </form>
-    </section>
-    <WeddingDetails />
-  </div>
+        <RadioChoices @update-plus-one="updatePlusOne" />
+      </template>
+      <BaseButton v-if="!isLoading">
+        <span v-if="polish"> Wyślij </span>
+        <span v-else> Submit </span>
+      </BaseButton>
+      <LoadingButton v-if="isLoading" />
+    </form>
+  </section>
+  <WeddingDetails />
 </template>
 
 <script>

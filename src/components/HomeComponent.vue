@@ -1,58 +1,53 @@
 <template>
-  <div
-    class="md:flex flex-col justify-center m-auto gap-y-5 max-w-xl rounded-xl px-2 md:pt-16"
+  <HomeLogo />
+  <section id="Titles" class="mx-auto max-w-sm">
+    <h1 v-if="polish">Wpisz nazwisko oraz kod pin z zaproszenia</h1>
+    <h1 v-else>
+      Please intput your surname and pin as they appear on the invitation
+    </h1>
+  </section>
+  <form
+    class="w-1/2 mx-auto flex flex-col gap-y-5 md:text-lg"
+    @submit.prevent="submitForm"
   >
-    <slot></slot>
-    <HomeLogo />
-    <section id="Titles" class="mx-auto max-w-sm">
-      <h1 v-if="polish">Wpisz nazwisko oraz kod pin z zaproszenia</h1>
-      <h1 v-else>
-        Please intput your surname and pin as they appear on the invitation
-      </h1>
-    </section>
-    <form
-      class="w-1/2 mx-auto flex flex-col gap-y-5 md:text-lg"
-      @submit.prevent="submitForm"
-    >
-      <div>
-        <label for="Guest-Name" class="text-green font-semibold">
-          <span v-if="polish">Nazwisko z zaproszenia</span>
-          <span v-else>Surname on invitation</span>
-        </label>
-        <IconInput
-          forLabel="Guest-Name"
-          icon="person"
-          :placeholder="placeholderLogic"
-          v-model.trim="state.user.surname"
-          :error="v$.user.surname.$error ? true : false"
-        />
-      </div>
-      <div>
-        <label for="Guest-Pin" class="text-green font-semibold">
-          <span v-if="polish">Kod pin z zaproszenia</span>
-          <span v-else>Code pin from your invitation</span>
-        </label>
-        <IconInput
-          forLabel="Guest-Pin"
-          icon="pin"
-          placeholder="Pin"
-          v-model.number="state.user.pin"
-          :error="v$.user.pin.$error ? true : false"
-        />
-      </div>
-      <BaseButton v-if="!isLoading">
-        <span v-if="polish"> Dalej </span>
-        <span v-else> Submit </span>
-      </BaseButton>
-      <LoadingButton v-if="isLoading" />
-      <h2 class="font-semibold text-sm" v-if="polish">
-        Prosimy o potwierdzenie obecności do 30 maja 2022 r.
-      </h2>
-      <h2 v-else class="font-semibold text-sm">
-        Please RSVP before 30th may 2022
-      </h2>
-    </form>
-  </div>
+    <div>
+      <label for="Guest-Name" class="text-green font-semibold">
+        <span v-if="polish">Nazwisko z zaproszenia</span>
+        <span v-else>Surname on invitation</span>
+      </label>
+      <IconInput
+        forLabel="Guest-Name"
+        icon="person"
+        :placeholder="placeholderLogic"
+        v-model.trim="state.user.surname"
+        :error="v$.user.surname.$error ? true : false"
+      />
+    </div>
+    <div>
+      <label for="Guest-Pin" class="text-green font-semibold">
+        <span v-if="polish">Kod pin z zaproszenia</span>
+        <span v-else>Code pin from your invitation</span>
+      </label>
+      <IconInput
+        forLabel="Guest-Pin"
+        icon="pin"
+        placeholder="Pin"
+        v-model.number="state.user.pin"
+        :error="v$.user.pin.$error ? true : false"
+      />
+    </div>
+    <BaseButton v-if="!isLoading">
+      <span v-if="polish"> Dalej </span>
+      <span v-else> Submit </span>
+    </BaseButton>
+    <LoadingButton v-if="isLoading" />
+    <h2 class="font-semibold text-sm" v-if="polish">
+      Prosimy o potwierdzenie obecności do 30 maja 2022 r.
+    </h2>
+    <h2 v-else class="font-semibold text-sm">
+      Please RSVP before 30th may 2022
+    </h2>
+  </form>
 </template>
 
 <script>

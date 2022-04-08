@@ -8,7 +8,12 @@
       ><span v-if="polish">O Nas</span> <span v-else>About</span></router-link
     >
   </nav>
-  <router-view />
+  <div
+    class="md:flex flex-col justify-center items-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2 md:pt-16"
+  >
+    <FallingLeaves></FallingLeaves>
+    <router-view />
+  </div>
   <div id="footer" class="flex justify-center gap-x-2 absolute bottom-0 w-full">
     <div class="relative inline-block w-10 mr-2 align-middle select-none">
       <span class="text-green font-semibold">
@@ -33,6 +38,7 @@
 
 <script>
 import { ref, provide } from "vue";
+import FallingLeaves from "./components/FallingLeaves.vue";
 export default {
   setup() {
     const polish = ref(true);
@@ -42,6 +48,7 @@ export default {
     provide("language", polish);
     return { polish, changeLanguage };
   },
+  components: { FallingLeaves },
 };
 </script>
 
