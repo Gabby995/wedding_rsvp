@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import rules from "@/rules";
+import store from "../store/index.js";
 
 const routes = [
   {
@@ -44,5 +45,9 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
+router.afterEach((to, from) => {
+  if (from.name === "confirmation") {
+    store.commit("guest/setGuest", null);
+  }
+});
 export default router;
