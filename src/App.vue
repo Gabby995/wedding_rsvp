@@ -55,7 +55,7 @@ export default {
 }
 
 nav {
-  padding: 30px;
+  padding: 20px 0 10px;
 }
 body::after {
   content: "";

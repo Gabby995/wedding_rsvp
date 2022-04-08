@@ -1,5 +1,5 @@
 <template>
-  <div class="flex relative">
+  <div class="flex relative shadow-xl">
     <span
       class="rounded-l-md inline-flex items-center px-3 border-t bg-white border-l border-b text-gray-500 shadow-sm text-sm"
       :class="error ? 'border-red-500' : 'border-gray-300'"
