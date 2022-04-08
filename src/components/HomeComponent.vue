@@ -102,7 +102,7 @@ export default {
             id: 1,
             surname: "Stark",
             display_name: "Tony & Pepper Stark",
-            type: "Family",
+            type: "Single",
             plus_one: "No",
             guests: 20,
             notes: "'I am Iron-Man'",
