@@ -6,13 +6,13 @@
     >
       <div class="w-full font-mono flex flex-col items-center relative z-10">
         <h1
-          class="font-extrabold text-5xl text-center text-gray-900 leading-tight mt-4"
+          class="font-extrabold text-5xl text-center text-gray-700 leading-tight mt-4"
         >
           Upps...
         </h1>
 
         <p
-          class="font-extrabold text-8xl my-44 text-gray-900 animate-bounce cursor-pointer"
+          class="font-extrabold text-8xl my-44 text-gray-700 animate-bounce cursor-pointer"
           @click="takeBack"
         >
           404
