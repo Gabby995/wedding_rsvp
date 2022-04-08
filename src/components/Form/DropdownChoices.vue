@@ -5,19 +5,39 @@
   </label>
 
   <select
+    v-if="polish"
     id="confirmation"
-    class="w-52 mb-2 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+    class="w-52 mb-2 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm"
     name="confirmation"
   >
-    <option value="">Select an option</option>
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
+    <option disabled selected value="">Wybierz opcje</option>
+    <option value="Yes">Będę / Będziemy! :)</option>
+    <option value="No">
+      Nie <span v-if="type === 'Single'">dam</span>
+      <span v-else>damy</span> rady :(
+    </option>
+  </select>
+  <select
+    v-else
+    id="confirmation"
+    class="w-52 mb-2 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm"
+    name="confirmation"
+  >
+    <option disabled selected value="">Select an option</option>
+    <option value="Yes">Will be there! :)</option>
+    <option value="No">Can't make it :(</option>
   </select>
 </template>
 
 <script>
 import { inject } from "vue";
 export default {
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+  },
   setup() {
     const polish = inject("language");
     return { polish };

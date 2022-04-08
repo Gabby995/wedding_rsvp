@@ -12,7 +12,7 @@
         class="md:text-lg flex flex-col justify-center items-center gap-y-2 pb-8"
         @submit.prevent="submitForm"
       >
-        <DropdownChoices />
+        <DropdownChoices :type="computedData.invitation.type" />
         <RadioChoices v-if="computedData.invitation.type === 'Single'" />
         <BaseButton v-if="!isLoading">
           <span v-if="polish"> Wyślij </span>
