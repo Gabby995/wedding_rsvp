@@ -25,8 +25,6 @@
         >
           <RadioChoices @update-plus-one="updatePlusOne" />
         </template>
-
-        {{ state }}
         <BaseButton v-if="!isLoading">
           <span v-if="polish"> Wyślij </span>
           <span v-else> Submit </span>
@@ -78,11 +76,19 @@ export default {
       },
     };
     function updatePlusOne(data) {
-      console.log("IPDATED", data);
       state.invitation.plus_one = data;
     }
     const v$ = useVuelidate(rules, state);
     // Used to setup beforeUnload (stops reloading page)
+    function submitGuestResponse() {
+      v$.value.$touch();
+      if (v$.value.$error) {
+        return;
+      } else {
+        isLoading.value = true;
+        console.log("RESPNSE SIBMIT");
+      }
+    }
     onBeforeMount(function () {
       window.addEventListener("beforeunload", preventNav);
     });
@@ -104,11 +110,6 @@ export default {
         if (!answer) return false;
       }
     });
-
-    function submitGuestResponse() {
-      v$.value.$touch();
-      console.log("RESPNSE SIBMIT");
-    }
 
     return {
       isLoading,
