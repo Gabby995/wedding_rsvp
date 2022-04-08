@@ -8,6 +8,14 @@
       <Icon icon="fa6-solid:money-bill-1-wave" color="black" class="text-3xl" />
     </div>
   </section>
+  <section id="Details" class="text-sm">
+    <p class="pb-2">
+      <span v-if="polish"> W razie problemów proszę o kontakt:</span>
+      <span v-else>Any issues? Please contact:</span>
+    </p>
+    <p>Tel: +44 7481 251087</p>
+    <p>E-mail: geborysmarta@yahoo.co.uk</p>
+  </section>
 </template>
 
 <script>
