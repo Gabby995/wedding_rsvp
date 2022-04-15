@@ -11,6 +11,17 @@
     @submit.prevent="submitForm"
   >
     <div>
+      <div class="text-red-500 mb-3" v-if="error && error === 'DetailsIssue'">
+        <span v-if="polish">Bląd! - Sprawdz Nazwisko lub Pin</span>
+        <span v-else>Error! - Check surname or pin</span>
+      </div>
+      <div class="text-red-500 mb-3" v-if="error && error !== 'DetailsIssue'">
+        <span v-if="polish"
+          >Bląd! - Coś poszło nie tak :( <br />
+          Sprawdz Nazwisko lub Pin</span
+        >
+        <span v-else>Error! - Something went wrong :(</span>
+      </div>
       <label for="Guest-Name" class="text-green font-semibold">
         <span v-if="polish">Nazwisko z zaproszenia</span>
         <span v-else>Surname on invitation</span>
@@ -32,6 +43,7 @@
         forLabel="Guest-Pin"
         icon="pin"
         placeholder="Pin"
+        typeProp="number"
         v-model.number="state.user.pin"
         :error="v$.user.pin.$error ? true : false"
       />
@@ -125,7 +137,15 @@ export default {
         return "Surname";
       }
     });
-    return { isLoading, state, v$, submitForm, polish, placeholderLogic };
+    return {
+      isLoading,
+      state,
+      v$,
+      submitForm,
+      polish,
+      placeholderLogic,
+      error,
+    };
   },
 };
 </script>

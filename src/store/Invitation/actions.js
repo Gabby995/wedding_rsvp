@@ -10,6 +10,9 @@ export default {
   async getInvitation(context, payload) {
     const response = await POSTCallHelper("/invitation", payload);
     console.log("InvitatioN: ", response.data);
+    if (response.data.success === false) {
+      throw new Error("DetailsIssue");
+    }
     context.commit("setInvitation", response.data);
   },
   // Update Invitation

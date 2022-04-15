@@ -9,7 +9,7 @@
       </span>
     </span>
     <input
-      type="text"
+      :type="typeProp"
       :id="forLabel"
       :value="modelValue"
       @input="updateValue"
@@ -34,6 +34,10 @@ export default {
     },
     error: {
       type: Boolean,
+    },
+    typeProp: {
+      type: String,
+      default: "text",
     },
     modelValue: {},
   },
