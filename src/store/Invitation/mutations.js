@@ -8,4 +8,7 @@ export default {
   setInvitation(state, payload) {
     state.invitation = payload;
   },
+  setUpdateSuccess(state, payload) {
+    state.updateSuccess = payload;
+  },
 };

@@ -22,6 +22,10 @@
       >
         <RadioChoices @update-plus-one="updatePlusOne" />
       </template>
+      <div v-if="error" class="text-red-500 mb-3">
+        <span v-if="polish">Bląd! - Coś poszło nie tak :( </span>
+        <span v-else>Error! - Something went wrong :(</span>
+      </div>
       <BaseButton v-if="!isLoading">
         <span v-if="polish"> Wyślij </span>
         <span v-else> Submit </span>
@@ -37,6 +41,7 @@ import { ref, reactive, computed, inject, onBeforeMount } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { onBeforeRouteLeave } from "vue-router";
 import WeddingDetails from "@/components/Sections/WeddingDetails.vue";
 import RadioChoices from "@/components/Form/RadioChoices.vue";
@@ -57,8 +62,12 @@ export default {
     let error = ref("");
     let isLoading = ref(false);
     const store = useStore();
+    const router = useRouter();
     const computedData = computed(function () {
       return store.getters["invitation/getInvitation"];
+    });
+    const updateSuccessComputed = computed(function () {
+      return store.getters["invitation/getUpdateSuccess"];
     });
     const state = reactive({
       invitation: {
@@ -88,10 +97,12 @@ export default {
             state.invitation.guests += 1;
           }
           isLoading.value = true;
-          await store.dispatch("invitation/updateInvitaion", state.invitation);
-          // router.push({
-          //   name: "confirmation",
-          // });
+          await store.dispatch("invitation/updateInvitation", state.invitation);
+          // store.commit("invitation/setInvitation", null);
+          router.push({
+            name: "home",
+            query: { success: "true" },
+          });
         } catch (e) {
           error.value = e.message;
           isLoading.value = false;
@@ -102,12 +113,14 @@ export default {
       window.addEventListener("beforeunload", preventNav);
     });
     function preventNav(event) {
+      console.log("Inside");
       if (!computedData.value) return;
       event.preventDefault();
       // Chrome requires returnValue to be set.
       event.returnValue = "";
     }
     onBeforeRouteLeave(() => {
+      if (updateSuccessComputed.value) return;
       let message =
         "Czy na pewno chcesz opuścić tę stronę? Twoja odpowiedź nie została zapisana";
       if (computedData.value) {

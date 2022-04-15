@@ -8,4 +8,7 @@ export default {
   getInvitation(state) {
     return state.invitation;
   },
+  getUpdateSuccess(state) {
+    return state.updateSuccess;
+  },
 };

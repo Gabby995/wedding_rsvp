@@ -8,6 +8,7 @@ export default {
     return {
       invitations: null,
       invitation: null,
+      updateSuccess: null,
     };
   },
   mutations,

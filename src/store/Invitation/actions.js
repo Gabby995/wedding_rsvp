@@ -1,4 +1,5 @@
 import { POSTCallHelper, GETCallHelper } from "../../services.js";
+
 export default {
   // Get ALL Invitations
   async getInvitations(context) {
@@ -16,10 +17,15 @@ export default {
     context.commit("setInvitation", response.data);
   },
   // Update Invitation
-  async updateInvitaion(context, payload) {
-    console.log("PAYLOD: ", payload);
+  async updateInvitation(context, payload) {
     const response = await POSTCallHelper("/update", payload);
-    console.log("UpdateInvitation: ", response.data);
+    if (response.data.success === false) {
+      throw new Error("UpdateIssue");
+    } else {
+      context.commit("setUpdateSuccess", true);
+      console.log("No Error");
+    }
+    console.log("updateInvitation: ", response.data);
     // context.commit("setInvitation", response.data);
   },
 };

@@ -51,6 +51,7 @@ router.afterEach((to, from) => {
     router.currentRoute._rawValue.name !== "confirmation"
   ) {
     store.commit("invitation/setInvitation", null);
+    store.commit("invitation/setUpdateSuccess", null);
   }
 });
 export default router;
