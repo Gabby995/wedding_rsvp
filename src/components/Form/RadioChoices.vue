@@ -6,7 +6,7 @@
       <input
         type="radio"
         name="AdditionalGuest"
-        value="Yes"
+        value="yes"
         class="h-5 w-5"
         v-model="plus_one"
         @change="updateValue"
@@ -18,7 +18,7 @@
       <input
         type="radio"
         name="AdditionalGuest"
-        value="No"
+        value="no"
         class="h-5 w-5"
         v-model="plus_one"
         @change="updateValue"
@@ -34,7 +34,7 @@ import { ref, inject } from "vue";
 export default {
   emits: ["update-plus-one"],
   setup(props, context) {
-    let plus_one = ref("No");
+    let plus_one = ref("no");
     const polish = inject("language");
     const updateValue = () => {
       context.emit("update-plus-one", plus_one.value);

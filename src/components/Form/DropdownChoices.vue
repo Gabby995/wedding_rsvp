@@ -14,12 +14,12 @@
     @input="updateValue"
   >
     <option disabled selected value="">Wybierz opcje</option>
-    <option value="Yes">
-      <span v-if="type === 'Single'">Będę! :)</span>
+    <option value="yes">
+      <span v-if="type === 'single'">Będę! :)</span>
       <span v-else>Będziemy! :)</span>
     </option>
-    <option value="No">
-      Nie <span v-if="type === 'Single'">dam</span>
+    <option value="no">
+      Nie <span v-if="type === 'single'">dam</span>
       <span v-else>damy</span> rady :(
     </option>
   </select>
@@ -34,7 +34,7 @@
   >
     <option disabled selected value="">Select an option</option>
     <option value="Yes">
-      <span v-if="type === 'Single'">I </span> <span v-else>We </span>will be
+      <span v-if="type === 'single'">I </span> <span v-else>We </span>will be
       there! :)
     </option>
     <option value="No">Sorry, can't make it :(</option>

@@ -5,11 +5,11 @@
     </router-link>
     |
     <router-link to="/about"
-      ><span v-if="polish">O Nas</span> <span v-else>About</span></router-link
+      ><span v-if="polish"> Więcej</span> <span v-else>About</span></router-link
     >
   </nav>
   <div
-    class="md:flex flex-col justify-center items-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2 md:pt-16"
+    class="flex flex-col justify-center items-center m-auto gap-y-5 max-w-xl rounded-xl bg-white bg-opacity-40 px-2"
   >
     <FallingLeaves></FallingLeaves>
     <router-view />

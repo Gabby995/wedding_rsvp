@@ -16,8 +16,8 @@
       />
       <template
         v-if="
-          computedData.invitation.type === 'Single' &&
-          state.invitation.confirmation === 'Yes'
+          computedData.invitation.type === 'single' &&
+          state.invitation.confirmation === 'yes'
         "
       >
         <RadioChoices @update-plus-one="updatePlusOne" />
@@ -54,16 +54,18 @@ export default {
 
   setup() {
     const polish = inject("language");
+    let error = ref("");
     let isLoading = ref(false);
     const store = useStore();
     const computedData = computed(function () {
-      return store.getters["guest/getGuest"];
+      return store.getters["invitation/getInvitation"];
     });
     const state = reactive({
       invitation: {
-        id: computedData.value.invitation.id,
+        invitation: computedData.value.invitation.id,
         confirmation: "",
-        plus_one: "No",
+        plus_one: "no",
+        guests: parseInt(computedData.value.invitation.guests),
       },
     });
     const rules = {
@@ -76,13 +78,24 @@ export default {
     }
     const v$ = useVuelidate(rules, state);
     // Used to setup beforeUnload (stops reloading page)
-    function submitGuestResponse() {
+    async function submitGuestResponse() {
       v$.value.$touch();
       if (v$.value.$error) {
         return;
       } else {
-        isLoading.value = true;
-        console.log("RESPNSE SIBMIT");
+        try {
+          if (state.invitation.plus_one === "yes") {
+            state.invitation.guests += 1;
+          }
+          isLoading.value = true;
+          await store.dispatch("invitation/updateInvitaion", state.invitation);
+          // router.push({
+          //   name: "confirmation",
+          // });
+        } catch (e) {
+          error.value = e.message;
+          isLoading.value = false;
+        }
       }
     }
     onBeforeMount(function () {
@@ -115,6 +128,7 @@ export default {
       v$,
       state,
       updatePlusOne,
+      error,
     };
   },
 };

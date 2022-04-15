@@ -6,7 +6,6 @@ export default {
   namespaced: true,
   state() {
     return {
-      guest: null,
       invitations: null,
       invitation: null,
     };

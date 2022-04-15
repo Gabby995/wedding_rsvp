@@ -107,27 +107,13 @@ export default {
         try {
           isLoading.value = true;
           await store.dispatch("invitation/getInvitation", state.user);
-          isLoading.value = false;
+          router.push({
+            name: "confirmation",
+          });
         } catch (e) {
           error.value = e.message;
           isLoading.value = false;
         }
-        // store.commit("guest/setGuest", {
-        //   invitation: {
-        //     id: 1,
-        //     surname: "Stark",
-        //     display_name: "Tony & Pepper Stark",
-        //     type: "Single",
-        //     plus_one: "No",
-        //     guests: 20,
-        //     notes: "'I am Iron-Man'",
-        //     pin: "3VcY",
-        //     confirmation: "Yes",
-        //   },
-        // });
-        router.push({
-          name: "confirmation",
-        });
       }
     }
     const placeholderLogic = computed(function () {

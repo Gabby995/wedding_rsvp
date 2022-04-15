@@ -17,6 +17,7 @@ export default {
   },
   // Update Invitation
   async updateInvitaion(context, payload) {
+    console.log("PAYLOD: ", payload);
     const response = await POSTCallHelper("/update", payload);
     console.log("UpdateInvitation: ", response.data);
     // context.commit("setInvitation", response.data);

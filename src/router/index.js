@@ -50,7 +50,7 @@ router.afterEach((to, from) => {
     from.name === "confirmation" &&
     router.currentRoute._rawValue.name !== "confirmation"
   ) {
-    store.commit("guest/setGuest", null);
+    store.commit("invitation/setInvitation", null);
   }
 });
 export default router;
