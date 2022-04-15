@@ -1,13 +1,11 @@
 import { createStore } from "vuex";
 
-import guestsModule from "./Guests/index.js";
-import adminModule from "./Admin/index.js";
+import invitationModule from "./Invitation/index.js";
 
 // Creates store modules
 const store = createStore({
   modules: {
-    guest: guestsModule,
-    admin: adminModule,
+    invitation: invitationModule,
   },
 });
 

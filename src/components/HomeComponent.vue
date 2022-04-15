@@ -69,6 +69,7 @@ export default {
   },
   setup() {
     let isLoading = ref(false);
+    let error = ref("");
     const polish = inject("language");
     const router = useRouter();
     const store = useStore();
@@ -86,25 +87,32 @@ export default {
     };
     const v$ = useVuelidate(rules, state);
 
-    function submitForm() {
+    async function submitForm() {
       v$.value.$touch();
       if (v$.value.$error) {
         return;
       } else {
-        isLoading.value = true;
-        store.commit("guest/setGuest", {
-          invitation: {
-            id: 1,
-            surname: "Stark",
-            display_name: "Tony & Pepper Stark",
-            type: "Single",
-            plus_one: "No",
-            guests: 20,
-            notes: "'I am Iron-Man'",
-            pin: "3VcY",
-            confirmation: "Yes",
-          },
-        });
+        try {
+          isLoading.value = true;
+          await store.dispatch("invitation/getInvitation", state.user);
+          isLoading.value = false;
+        } catch (e) {
+          error.value = e.message;
+          isLoading.value = false;
+        }
+        // store.commit("guest/setGuest", {
+        //   invitation: {
+        //     id: 1,
+        //     surname: "Stark",
+        //     display_name: "Tony & Pepper Stark",
+        //     type: "Single",
+        //     plus_one: "No",
+        //     guests: 20,
+        //     notes: "'I am Iron-Man'",
+        //     pin: "3VcY",
+        //     confirmation: "Yes",
+        //   },
+        // });
         router.push({
           name: "confirmation",
         });

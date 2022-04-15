@@ -6,7 +6,9 @@ export default {
   namespaced: true,
   state() {
     return {
-      users: null,
+      guest: null,
+      invitations: null,
+      invitation: null,
     };
   },
   mutations,
