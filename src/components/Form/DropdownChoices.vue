@@ -33,11 +33,11 @@
     @input="updateValue"
   >
     <option disabled selected value="">Select an option</option>
-    <option value="Yes">
+    <option value="yes">
       <span v-if="type === 'single'">I </span> <span v-else>We </span>will be
       there! :)
     </option>
-    <option value="No">Sorry, can't make it :(</option>
+    <option value="no">Sorry, can't make it :(</option>
   </select>
 </template>
 
