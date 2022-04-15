@@ -5,6 +5,10 @@
     <h1 v-else>
       Please intput your surname and pin as they appear on the invitation
     </h1>
+    <h2 class="text-green-500 font-bold mt-1 text-xl" v-if="invitationUpdated">
+      <span v-if="polish">Dziękujemy! - Odpowiedź została zarejestrowana </span>
+      <span v-else>Thank you! - Your answer was registered </span>
+    </h2>
   </section>
   <form
     class="w-1/2 mx-auto flex flex-col gap-y-5 md:text-lg"
@@ -68,8 +72,8 @@ import { required, minLength } from "@vuelidate/validators";
 import IconInput from "@/components/Form/IconInput.vue";
 import LoadingButton from "./Form/LoadingButton.vue";
 import BaseButton from "./Form/BaseButton.vue";
-import { ref, reactive, inject, computed } from "vue";
-import { useRouter } from "vue-router";
+import { ref, reactive, inject, computed, onBeforeMount } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import HomeLogo from "./Sections/HomeLogo.vue";
 export default {
@@ -80,10 +84,17 @@ export default {
     HomeLogo,
   },
   setup() {
+    onBeforeMount(function () {
+      if (route.query.success) {
+        invitationUpdated.value = true;
+      }
+    });
     let isLoading = ref(false);
     let error = ref("");
+    let invitationUpdated = ref(false);
     const polish = inject("language");
     const router = useRouter();
+    const route = useRoute();
     const store = useStore();
     const state = reactive({
       user: {
@@ -131,6 +142,7 @@ export default {
       polish,
       placeholderLogic,
       error,
+      invitationUpdated,
     };
   },
 };

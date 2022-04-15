@@ -8,6 +8,7 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+    query: { success: "" },
   },
   {
     path: "/about",
