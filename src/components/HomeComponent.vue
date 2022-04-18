@@ -89,6 +89,9 @@ export default {
         invitationUpdated.value = true;
       }
     });
+    const computedInvitationData = computed(function () {
+      return store.getters["invitation/getInvitation"];
+    });
     let isLoading = ref(false);
     let error = ref("");
     let invitationUpdated = ref(false);
@@ -118,9 +121,18 @@ export default {
         try {
           isLoading.value = true;
           await store.dispatch("invitation/getInvitation", state.user);
-          router.push({
-            name: "confirmation",
-          });
+          if (computedInvitationData.value.invitation.confirmation === "yes") {
+            router.push({
+              name: "confirmation-complete",
+              params: {
+                invitationID: computedInvitationData.value.invitation.id,
+              },
+            });
+          } else {
+            router.push({
+              name: "confirmation",
+            });
+          }
         } catch (e) {
           error.value = e.message;
           isLoading.value = false;

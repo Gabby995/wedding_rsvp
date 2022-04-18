@@ -29,6 +29,15 @@ const routes = [
     beforeEnter: rules.guestSet,
   },
   {
+    path: "/confirmation/:invitationID",
+    name: "confirmation-complete",
+    component: () =>
+      import(
+        /* webpackChunkName: "confirmation" */ "../views/ConfirmationCompleteView.vue"
+      ),
+    beforeEnter: rules.guestSet,
+  },
+  {
     path: "/admin",
     name: "admin",
     component: () =>

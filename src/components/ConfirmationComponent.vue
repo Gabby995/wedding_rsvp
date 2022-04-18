@@ -113,7 +113,6 @@ export default {
       window.addEventListener("beforeunload", preventNav);
     });
     function preventNav(event) {
-      console.log("Inside");
       if (!computedData.value) return;
       event.preventDefault();
       // Chrome requires returnValue to be set.
