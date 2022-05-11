@@ -5,7 +5,7 @@
       Tomaszowie Lubelskim
     </p>
     <p class="mb-5 max-w-sm mx-auto" v-else>
-      The ceremony will take place at 16:00 in the Kościół Zwiastowania NMP in
+      The ceremony will take place at 16:00 in Kościół Zwiastowania NMP in
       Tomaszow Lubelski
     </p>
     <div class="grid grid-cols-3 gap-0 mb-2">
@@ -20,8 +20,8 @@
     </p>
     <p class="max-w-sm mx-auto" v-else>
       After the ceremony it will be our honor to host you for a wedding
-      reception taking place at Restauracji Staropolskiej on the Lwowskiej 126
-      street.
+      reception taking place at Restauracji Staropolskiej located on Lwowskiej
+      126 street.
     </p>
   </section>
 </template>
