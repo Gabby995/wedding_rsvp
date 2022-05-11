@@ -15,12 +15,14 @@
   >
     <option disabled selected value="">Wybierz opcje</option>
     <option value="yes">
-      <span v-if="type === 'single'">Będę! :)</span>
-      <span v-else>Będziemy! :)</span>
+      <!-- <span v-if="type === 'single'">Będę! :)</span> -->
+      <!-- <span v-else>Będziemy! :)</span> -->
+      <span>Potwierdzam Przybycie!</span>
     </option>
     <option value="no">
-      Nie <span v-if="type === 'single'">dam</span>
-      <span v-else>damy</span> rady :(
+      <!-- Nie <span v-if="type === 'single'">dam</span>
+      <span v-else>damy</span> rady :( -->
+      <span>Z Przykrością Odmawiam</span>
     </option>
   </select>
   <select
