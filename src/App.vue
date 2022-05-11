@@ -14,7 +14,7 @@
     <FallingLeaves></FallingLeaves>
     <router-view />
   </div>
-  <div id="footer" class="flex justify-center gap-x-2 absolute bottom-0 w-full">
+  <div id="footer" class="flex justify-center gap-x-2 pt-3 bottom-0 w-full">
     <div class="relative inline-block w-10 mr-2 align-middle select-none">
       <span class="text-green font-semibold">
         <span v-if="polish">English</span>
