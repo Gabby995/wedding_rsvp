@@ -27,7 +27,7 @@
         <span v-else>Error! - Something went wrong :(</span>
       </div>
       <label for="Guest-Name" class="text-green font-semibold">
-        <span v-if="polish">Nazwiskoa</span>
+        <span v-if="polish">Nazwisko</span>
         <span v-else>Surname</span>
       </label>
       <IconInput
