@@ -27,8 +27,8 @@
         <span v-else>Error! - Something went wrong :(</span>
       </div>
       <label for="Guest-Name" class="text-green font-semibold">
-        <span v-if="polish">Nazwisko z zaproszenia</span>
-        <span v-else>Surname on invitation</span>
+        <span v-if="polish">Nazwiskoa</span>
+        <span v-else>Surname</span>
       </label>
       <IconInput
         forLabel="Guest-Name"
@@ -40,8 +40,8 @@
     </div>
     <div>
       <label for="Guest-Pin" class="text-green font-semibold">
-        <span v-if="polish">Kod pin z zaproszenia</span>
-        <span v-else>Code pin from your invitation</span>
+        <span v-if="polish">Kod Pin</span>
+        <span v-else>Code Pin</span>
       </label>
       <IconInput
         forLabel="Guest-Pin"
